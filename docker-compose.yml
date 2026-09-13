@@ -42,6 +42,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  localstack:
+    container_name: localstack_main
+    image: localstack/localstack:latest
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      - SERVICES=ec2
+      - LOCALSTACK_AUTH_TOKEN="ls-fEmoCEKa-7711-wihA-RUgO-zaDa6411e68e"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
 
 volumes:
   postgres_data:
