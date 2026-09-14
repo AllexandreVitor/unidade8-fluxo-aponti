@@ -70,11 +70,31 @@ resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
   }
 }
 
+data "aws_caller_identity" "current" {}
+
 #CKV_AWS_145
 resource "aws_kms_key" "documentos" {
   description             = "Chave KMS para criptografia dos documentos do sistema de agendamento"
   deletion_window_in_days = 7
   enable_key_rotation     = true
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+
+    Statement = [
+      {
+        Sid    = "AllowAccountAdministration"
+        Effect = "Allow"
+
+        Principal = {
+          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+        }
+
+        Action   = "kms:*"
+        Resource = "*"
+      }
+    ]
+  })
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "documentos" {
