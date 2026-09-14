@@ -45,3 +45,17 @@ resource "aws_s3_bucket_versioning" "documentos" {
     status = "Enabled"
   }
 }
+
+#CKV2_AWS_61
+resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
+  bucket = aws_s3_bucket.documentos.id
+
+  rule {
+    id     = "gerenciamento-documentos"
+    status = "Enabled"
+
+    filter {
+      prefix = ""
+    }
+  }
+}
