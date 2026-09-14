@@ -68,3 +68,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
     }
   }
 }
+
+#CKV_AWS_145
+resource "aws_kms_key" "documentos" {
+  description             = "Chave KMS para criptografia dos documentos do sistema de agendamento"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+}
