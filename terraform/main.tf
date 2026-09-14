@@ -40,6 +40,7 @@ resource "aws_s3_bucket_logging" "documentos" {
   target_prefix = "access-logs/"
 }
 
+# CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "logs" {
   bucket = aws_s3_bucket.logs.id
 
@@ -49,6 +50,7 @@ resource "aws_s3_bucket_public_access_block" "logs" {
   restrict_public_buckets = true
 }
 
+# CKV_AWS_21
 resource "aws_s3_bucket_versioning" "logs" {
   bucket = aws_s3_bucket.logs.id
 
@@ -57,6 +59,7 @@ resource "aws_s3_bucket_versioning" "logs" {
   }
 }
 
+# CKV2_AWS_61
 resource "aws_s3_bucket_lifecycle_configuration" "logs" {
   bucket = aws_s3_bucket.logs.id
 
@@ -78,6 +81,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
   }
 }
 
+# CKV_AWS_145
 resource "aws_s3_bucket_server_side_encryption_configuration" "logs" {
   bucket = aws_s3_bucket.logs.id
 
