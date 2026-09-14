@@ -12,7 +12,7 @@ terraform {
 provider "aws" {
   access_key                  = "test"
   secret_key                  = "test"
-  region                      = "us-east-1"
+  region                      = var.aws_region
   s3_use_path_style           = true
   skip_credentials_validation = true
   skip_metadata_api_check     = true
@@ -24,5 +24,5 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "documentos" {
-  bucket = "agendamento-consultas-documentos"
+  bucket = var.bucket_name
 }
