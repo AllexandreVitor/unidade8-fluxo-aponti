@@ -36,3 +36,12 @@ resource "aws_s3_bucket_public_access_block" "documentos" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+#CKV_AWS_21
+resource "aws_s3_bucket_versioning" "documentos" {
+  bucket = aws_s3_bucket.documentos.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
