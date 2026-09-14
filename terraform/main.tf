@@ -61,5 +61,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
     expiration {
       expired_object_delete_marker = true
     }
+
+    # CKV_AWS_300
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
   }
 }
