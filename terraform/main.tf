@@ -57,5 +57,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
     filter {
       prefix = ""
     }
+
+    expiration {
+      expired_object_delete_marker = true
+    }
   }
 }
