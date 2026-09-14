@@ -57,6 +57,27 @@ resource "aws_s3_bucket_versioning" "logs" {
   }
 }
 
+resource "aws_s3_bucket_lifecycle_configuration" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    id     = "gerenciamento-logs"
+    status = "Enabled"
+
+    filter {
+      prefix = ""
+    }
+
+    expiration {
+      expired_object_delete_marker = true
+    }
+
+    abort_incomplete_multipart_upload {
+      days_after_initiation = 7
+    }
+  }
+}
+
 # CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "documentos" {
   bucket = aws_s3_bucket.documentos.id
