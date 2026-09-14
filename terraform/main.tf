@@ -49,6 +49,13 @@ resource "aws_s3_bucket_public_access_block" "logs" {
   restrict_public_buckets = true
 }
 
+resource "aws_s3_bucket_versioning" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
 
 # CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "documentos" {
