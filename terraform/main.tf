@@ -28,6 +28,18 @@ resource "aws_s3_bucket" "documentos" {
   bucket = var.bucket_name
 }
 
+#CKV_AWS_18
+resource "aws_s3_bucket" "logs" {
+  bucket = "${var.bucket_name}-logs"
+}
+
+resource "aws_s3_bucket_logging" "documentos" {
+  bucket = aws_s3_bucket.documentos.id
+
+  target_bucket = aws_s3_bucket.logs.id
+  target_prefix = "access-logs/"
+}
+
 # CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "documentos" {
   bucket = aws_s3_bucket.documentos.id
