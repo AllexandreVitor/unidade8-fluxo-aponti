@@ -22,3 +22,7 @@ provider "aws" {
     s3 = "http://s3.localhost.localstack.cloud:4566"
   }
 }
+
+resource "aws_s3_bucket" "documentos" {
+  bucket = "agendamento-consultas-documentos"
+}
