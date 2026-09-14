@@ -70,7 +70,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "documentos" {
   }
 }
 
-data "aws_caller_identity" "current" {}
 
 #CKV_AWS_145
 resource "aws_kms_key" "documentos" {
@@ -87,7 +86,7 @@ resource "aws_kms_key" "documentos" {
         Effect = "Allow"
 
         Principal = {
-          AWS = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
+          AWS = "arn:aws:iam::000000000000:root"
         }
 
         Action   = "kms:*"
