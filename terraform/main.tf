@@ -19,8 +19,9 @@ provider "aws" {
   skip_requesting_account_id  = true
 
   endpoints {
-    s3 = "http://s3.localhost.localstack.cloud:4566"
-  }
+  s3  = "http://s3.localhost.localstack.cloud:4566"
+  kms = "http://localhost:4566"
+}
 }
 
 resource "aws_s3_bucket" "documentos" {
