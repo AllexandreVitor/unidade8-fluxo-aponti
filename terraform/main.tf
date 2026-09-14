@@ -78,6 +78,17 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
   }
 }
 
+resource "aws_s3_bucket_server_side_encryption_configuration" "logs" {
+  bucket = aws_s3_bucket.logs.id
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm     = "aws:kms"
+      kms_master_key_id = aws_kms_key.documentos.arn
+    }
+  }
+}
+
 # CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "documentos" {
   bucket = aws_s3_bucket.documentos.id
