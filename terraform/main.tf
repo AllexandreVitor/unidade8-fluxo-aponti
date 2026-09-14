@@ -27,6 +27,7 @@ resource "aws_s3_bucket" "documentos" {
   bucket = var.bucket_name
 }
 
+# CKV2_AWS_6 do checkov
 resource "aws_s3_bucket_public_access_block" "documentos" {
   bucket = aws_s3_bucket.documentos.id
 
