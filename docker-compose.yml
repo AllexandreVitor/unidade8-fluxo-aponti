@@ -43,15 +43,19 @@ services:
       timeout: 5s
       retries: 5
   localstack:
-    container_name: localstack_main
+    container_name: localstack
     image: localstack/localstack:latest
     ports:
-      - "127.0.0.1:4566:4566"
+      - "4566:4566"
     environment:
-      - SERVICES=ec2
-      - LOCALSTACK_AUTH_TOKEN="ls-fEmoCEKa-7711-wihA-RUgO-zaDa6411e68e"
+      LOCALSTACK_AUTH_TOKEN: ${LOCALSTACK_AUTH_TOKEN:?LOCALSTACK_AUTH_TOKEN não configurado}
+      DEBUG: "0"
+      PERSISTENCE: "1"
+
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+      - localstack_data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   postgres_data:
+  localstack_data:

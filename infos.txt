@@ -1,0 +1,1 @@
+CKV_AWS_144 - não implementado: a replicação entre regiões não faz parte do requisito funcional do ambiente desenvolvido e adicionaria complexidade desnecessária ao cenário de laboratório.
