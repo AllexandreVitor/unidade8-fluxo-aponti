@@ -2,6 +2,9 @@
 # Etapa 1 - Build
 # =========================
 FROM node:20-alpine AS build
+RUN apk update && \
+    apk upgrade --no-cache && docker compose build --no-cache
+
 
 WORKDIR /app
 
@@ -19,6 +22,8 @@ RUN npm run build
 # Etapa 2 - Produção
 # =========================
 FROM node:20-alpine AS production
+RUN apk update && \
+    apk upgrade --no-cache && docker compose build --no-cache
 
 WORKDIR /app
 
