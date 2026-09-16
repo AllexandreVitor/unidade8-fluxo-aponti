@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: api-agendamento:latest
     container_name: api-agendamento
     restart: unless-stopped
 
