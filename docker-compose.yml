@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: api-agendamento:latest
+    container_name: api-agendamento
     restart: unless-stopped
 
     ports:
