@@ -53,9 +53,10 @@ jobs:
       - name: Build via Docker Compose
         env:
           LOCALSTACK_AUTH_TOKEN: ${{ secrets.LOCALSTACK_AUTH_TOKEN }}
-        run: docker compose build --no-cache
-              docker compose up -d
-              
+        run: |
+          docker compose build --no-cache
+          docker compose up -d
+
       - name: Varredura de Vulnerabilidades na Imagem (Trivy)
         uses: aquasecurity/trivy-action@master # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
         with:
