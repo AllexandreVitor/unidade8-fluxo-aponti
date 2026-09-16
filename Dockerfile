@@ -3,8 +3,7 @@
 # =========================
 FROM node:20-alpine AS build
 RUN apk update && \
-    apk upgrade --no-cache && docker compose build --no-cache
-
+    apk upgrade --no-cache
 
 WORKDIR /app
 
@@ -23,7 +22,7 @@ RUN npm run build
 # =========================
 FROM node:20-alpine AS production
 RUN apk update && \
-    apk upgrade --no-cache && docker compose build --no-cache
+    apk upgrade --no-cache 
 
 WORKDIR /app
 
