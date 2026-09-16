@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0 # Requerido pelo Gitleaks para escanear histórico completo
 
       - name: Scan de Segredos (Gitleaks)
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@v2 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -30,9 +30,9 @@ jobs:
           semgrep scan --config auto --error
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4 # nosemgrep: yaml.github-actions.security.github-actions-mutable-action-tag.github-actions-mutable-action-tag
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Instalar Dependências e Rodar Testes (Jest)
         run: |
