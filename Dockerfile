@@ -1,32 +1,25 @@
-# =========================
-# Etapa 1 - Build
-# =========================
 FROM node:20-alpine AS build
-RUN apk update && \
-    apk upgrade --no-cache
 
 WORKDIR /app
+
+RUN apk update && \
+    apk upgrade --no-cache
 
 COPY package*.json ./
 
 RUN npm ci
 
-COPY tsconfig.json ./
-COPY src ./src
+COPY . .
 
 RUN npm run build
 
 
-# =========================
-# Etapa 2 - Produção
-# =========================
 FROM node:20-alpine AS production
-RUN apk update && \
-    apk upgrade --no-cache 
 
 WORKDIR /app
 
-ENV NODE_ENV=production
+RUN apk update && \
+    apk upgrade --no-cache
 
 COPY package*.json ./
 
@@ -34,8 +27,6 @@ RUN npm ci --omit=dev
 
 COPY --from=build /app/dist ./dist
 
-EXPOSE 3000
-
-USER node
+EXPOSE 8080
 
 CMD ["node", "dist/server.js"]
